@@ -38,15 +38,6 @@ def LCD_WRITE(dat: number):
     tmp = pins.spi_write(dat)
     pins.digital_write_pin(DigitalPin.P8, 1)
 tmp = 0
-basic.show_leds("""
-    . # # # .
-    # # . # #
-    # . . . #
-    . # # # .
-    # . . . #
-    """)
-led.enable(False)
-LCD_INIT()
 hz_xi = [223,
     223,
     207,
@@ -79,10 +70,51 @@ hz_xi = [223,
     192,
     255,
     255]
+hz_bao = [239,
+    227,
+    211,
+    219,
+    219,
+    219,
+    218,
+    24,
+    25,
+    219,
+    219,
+    219,
+    203,
+    195,
+    243,
+    251,
+    255,
+    191,
+    191,
+    189,
+    189,
+    189,
+    189,
+    128,
+    128,
+    185,
+    129,
+    133,
+    173,
+    189,
+    191,
+    191]
+basic.show_leds("""
+    . # # # .
+    # # . # #
+    # . . . #
+    . # # # .
+    # . . . #
+    """)
+led.enable(False)
+LCD_INIT()
 LCD_WRITE_HZ(hz_xi, 0, 0)
-LCD_WRITE_HZ(hz_xi, 0, 16)
+LCD_WRITE_HZ(hz_bao, 0, 16)
 LCD_WRITE_HZ(hz_xi, 0, 32)
-LCD_WRITE_HZ(hz_xi, 0, 48)
+LCD_WRITE_HZ(hz_bao, 0, 48)
 
 def on_forever():
     pass

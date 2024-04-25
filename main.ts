@@ -17,7 +17,7 @@ function LCD_WRITE_HZ (hz: number[], page: number, col: number) {
     }
 }
 function LCD_INIT () {
-    pins.spiPins(DigitalPin.P12, DigitalPin.P13, DigitalPin.P11)
+    pins.spiPins(DigitalPin.P12, DigitalPin.P12, DigitalPin.P11)
     pins.spiFrequency(3000000)
     pins.spiFormat(8, 0)
     pins.digitalWritePin(DigitalPin.P8, 1)
@@ -42,15 +42,6 @@ function LCD_WRITE (dat: number) {
     pins.digitalWritePin(DigitalPin.P8, 1)
 }
 let tmp = 0
-basic.showLeds(`
-    . # # # .
-    # # . # #
-    # . . . #
-    . # # # .
-    # . . . #
-    `)
-led.enable(false)
-LCD_INIT()
 let hz_xi = [
 223,
 223,
@@ -85,10 +76,45 @@ let hz_xi = [
 255,
 255
 ]
+let hz_bao = [
+239,
+227,
+211,
+219,
+219,
+219,
+218,
+24,
+25,
+219,
+219,
+219,
+203,
+195,
+243,
+251,
+255,
+191,
+191,
+189,
+189,
+189,
+189,
+128,
+128,
+185,
+129,
+133,
+173,
+189,
+191,
+191
+]
+LCD_INIT()
 LCD_WRITE_HZ(hz_xi, 0, 0)
-LCD_WRITE_HZ(hz_xi, 0, 16)
+LCD_WRITE_HZ(hz_bao, 0, 16)
 LCD_WRITE_HZ(hz_xi, 0, 32)
-LCD_WRITE_HZ(hz_xi, 0, 48)
+LCD_WRITE_HZ(hz_bao, 0, 48)
 basic.forever(function () {
 	
 })
