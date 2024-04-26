@@ -1,28 +1,28 @@
 def LCD_WRITE_HZ(hz: List[number], page: number, col: number):
-    pins.digital_write_pin(DigitalPin.P10, 0)
+    pins.digital_write_pin(DigitalPin.P14, 0)
     LCD_WRITE(176 + page)
     LCD_WRITE(16 + col / 16)
     LCD_WRITE(col % 16)
-    pins.digital_write_pin(DigitalPin.P10, 1)
+    pins.digital_write_pin(DigitalPin.P14, 1)
     for index1 in range(16):
         LCD_WRITE(hz[index1])
-    pins.digital_write_pin(DigitalPin.P10, 0)
+    pins.digital_write_pin(DigitalPin.P14, 0)
     LCD_WRITE(177 + page)
     LCD_WRITE(16 + col / 16)
     LCD_WRITE(col % 16)
-    pins.digital_write_pin(DigitalPin.P10, 1)
+    pins.digital_write_pin(DigitalPin.P14, 1)
     for index2 in range(16):
         LCD_WRITE(hz[16 + index2])
 def LCD_INIT():
-    pins.spi_pins(DigitalPin.P12, DigitalPin.P13, DigitalPin.P11)
+    pins.spi_pins(DigitalPin.P16, DigitalPin.P16, DigitalPin.P15)
     pins.spi_frequency(3000000)
     pins.spi_format(8, 0)
-    pins.digital_write_pin(DigitalPin.P8, 1)
-    pins.digital_write_pin(DigitalPin.P9, 0)
+    pins.digital_write_pin(DigitalPin.P2, 1)
+    pins.digital_write_pin(DigitalPin.P13, 0)
     basic.pause(50)
-    pins.digital_write_pin(DigitalPin.P9, 1)
+    pins.digital_write_pin(DigitalPin.P13, 1)
     basic.pause(100)
-    pins.digital_write_pin(DigitalPin.P10, 0)
+    pins.digital_write_pin(DigitalPin.P14, 0)
     LCD_WRITE(226)
     LCD_WRITE(47)
     LCD_WRITE(175)
@@ -34,9 +34,9 @@ def LCD_INIT():
     LCD_WRITE(167)
 def LCD_WRITE(dat: number):
     global tmp
-    pins.digital_write_pin(DigitalPin.P8, 0)
+    pins.digital_write_pin(DigitalPin.P2, 0)
     tmp = pins.spi_write(dat)
-    pins.digital_write_pin(DigitalPin.P8, 1)
+    pins.digital_write_pin(DigitalPin.P2, 1)
 tmp = 0
 hz_xi = [223,
     223,
@@ -109,7 +109,6 @@ basic.show_leds("""
     . # # # .
     # . . . #
     """)
-led.enable(False)
 LCD_INIT()
 LCD_WRITE_HZ(hz_xi, 0, 0)
 LCD_WRITE_HZ(hz_bao, 0, 16)
